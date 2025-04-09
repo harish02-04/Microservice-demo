@@ -30,4 +30,4 @@ jobs:
           docker push $PRODUCT_IMAGE
 
       - name: Deploy using Docker Compose
-        run: docker-compose -f docker-compose.yml up -d
+        run: docker compose -f docker-compose.yml up -d

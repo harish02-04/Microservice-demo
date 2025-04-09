@@ -5,8 +5,8 @@ on:
     branches: [ main ]
 
 env:
-  USER_IMAGE: your-dockerhub-username/user-service
-  PRODUCT_IMAGE: your-dockerhub-username/product-service
+  USER_IMAGE: harishvai/user-service
+  PRODUCT_IMAGE: harishvai/product-service
 
 jobs:
   build-and-deploy:

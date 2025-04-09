@@ -1,0 +1,33 @@
+name: CI/CD Pipeline for Microservices
+
+on:
+  push:
+    branches: [ main ]
+
+env:
+  USER_IMAGE: your-dockerhub-username/user-service
+  PRODUCT_IMAGE: your-dockerhub-username/product-service
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Log in to Docker Hub
+        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+
+      - name: Build User Service Docker Image
+        run: |
+          docker build -t $USER_IMAGE ./user-service
+          docker push $USER_IMAGE
+
+      - name: Build Product Service Docker Image
+        run: |
+          docker build -t $PRODUCT_IMAGE ./product-service
+          docker push $PRODUCT_IMAGE
+
+      - name: Deploy using Docker Compose
+        run: docker-compose -f docker-compose.yml up -d

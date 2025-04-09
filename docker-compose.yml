@@ -1,0 +1,11 @@
+version: '3'
+services:
+  user:
+    image: harishvai/user-service
+    ports:
+      - "3001:3001"
+
+  product:
+    image: harishvai/product-service
+    ports:
+      - "3002:3002"
